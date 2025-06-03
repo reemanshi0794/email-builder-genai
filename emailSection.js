@@ -95,8 +95,7 @@ Suggested combinations:
 ["Text", "Button"] – for calls-to-action
 5. Response Guidelines
 
-Return a raw JSON array with 10–15 sections
-
+Return a raw JSON array of email sections. Each email must contain a minimum of 5 sections, and no upper limit, but typically 5–10 sections based on the content. Structure should adapt to the complexity and depth of the email topic.
 Sections should flow logically: introduction → value proposition → details → CTA
 
 Ensure each section reflects the given subject, must-have content points, and keywords

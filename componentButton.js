@@ -43,7 +43,7 @@ async function generateButtonComponent(emailTheme,section, parentSection, childI
   
   textAlign
   
-  buttonColor
+  buttonColor - Use primary color value from the theme 
   
   color
   

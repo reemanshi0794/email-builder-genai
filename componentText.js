@@ -33,8 +33,7 @@ async function generateTextComponent(emailTheme,section) {
   
   "fontWeight" must be a numeric string (e.g., "400").
   
-  "lineHeight" must numerically match "fontSize" (e.g., if fontSize is 16, lineHeight must be 16).
-  
+  lineHeight is always numerically equal to fontSize.  
   Include these style properties:
   fontWeight, color, fontFamily, fontSize, lineHeight, textAlign, padding, backgroundColor
   
@@ -47,9 +46,16 @@ async function generateTextComponent(emailTheme,section) {
 - color
 - fontFamily
 - fontSize
-- lineHeight
+- lineHeight - always equal to fontSize
 - textAlign
-- padding
+- padding-   must exactly follow this structure (values can be any number):
+
+{
+"top": <number>,
+"right": <number>,
+"bottom": <number>,
+"left": <number>
+}
 - backgroundColor
 
   Props Requirements (inside data.props):
@@ -60,7 +66,7 @@ async function generateTextComponent(emailTheme,section) {
   
   Theme for styling values:
   
-${JSON.stringify(emailTheme, null, 2)}
+${JSON.stringify(emailTheme, null, 2)}.
 
   3. Response Guidelines
   
@@ -72,10 +78,10 @@ ${JSON.stringify(emailTheme, null, 2)}
   
   Do not include any explanations, comments, or extra text outside the JSON.
 `;
+console.log("textsection",section)
 
   const userMessage = `
 Here’s the component definition. Please return a JSON object with the unique component ID as the key, and the component structure as the value. Use the theme provided in the system message to set styling.
-
 
 ${JSON.stringify({
     id: section.id,
