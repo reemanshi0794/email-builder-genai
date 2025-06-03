@@ -1,6 +1,6 @@
 const { callOpenAI } = require("./openai");
 
-async function generateButtonComponent(section, parentSection, childIndex) {
+async function generateButtonComponent(emailTheme,section, parentSection, childIndex) {
  
   const insideGrid = parentSection != null && parentSection.type === 'Columns';
   console.log("insideGrid",insideGrid, childIndex)
@@ -78,45 +78,7 @@ Width must be calculated dynamically based on the length of data.props.text and 
 
   padding
   Use the following theme JSON for consistent styles:
-  {
-    "fontFamily": "Arial, sans-serif",
-    "primaryColor": "#0056b3",
-    "secondaryColor": "#e7f1ff",
-    "textColor": "#333333",
-    "backgroundColor": "#ffffff",
-    "headingColor": "#222222",
-    "fontWeight": {
-      "heading": "700",
-      "body": "400",
-      "button": "600"
-    },
-    "fontSize": {
-      "heading": 24,
-      "subheading": 18,
-      "body": 16,
-      "button": 16
-    },
-    "lineHeight": {
-      "heading": 1.5,
-      "body": 1.6
-    },
-    "padding": {
-      "section": { "top": 20, "right": 15, "bottom": 20, "left": 15 },
-      "component": { "top": 10, "right": 10, "bottom": 10, "left": 10 }
-    },
-    "borderRadius": 5,
-    "buttonStyle": {
-      "textAlign": "center",
-      "buttonPadding": { "top": 10, "right": 20, "bottom": 10, "left": 20 },
-      "width": 100,
-      "height": 40
-    },
-    "imageStyle": {
-      "width": 100,
-      "objectFit": "cover"
-    }
-  }
-  
+  ${JSON.stringify(emailTheme, null, 2)}
   
   All values must conform to the default theme if the user does not specify them. The theme JSON includes predefined typography, spacing, color palette, and button styling defaults.
   

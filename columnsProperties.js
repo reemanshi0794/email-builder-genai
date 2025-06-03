@@ -1,6 +1,6 @@
 const { callOpenAI } = require('./openai');
 
-async function generateColumnsProperties(column) {
+async function generateColumnsProperties(emailTheme,column) {
   const systemMessage = `
 1. Role:
 You are a Structured Email Layout Transformer. Your task is to normalize user-provided JSON component structures (e.g., type: "Columns") into a strict internal schema. Each top-level component must be assigned a unique key and enriched with standardized data.style, data.props, and embedded childrens. Apply default theme values when explicit styles or props are missing.
@@ -50,45 +50,7 @@ Columns	rows (number), columns (number), cellWidths (number[])	columnGap, backgr
 Note: Use numeric values only for rows, columns, and cellWidths. Do not use strings with %.
 
 Theme Defaults:
-{
-  "fontFamily": "Arial, sans-serif",
-  "primaryColor": "#007BFF",
-  "secondaryColor": "#6C757D",
-  "textColor": "#212529",
-  "backgroundColor": "#FFFFFF",
-  "headingColor": "#343A40",
-  "fontWeight": {
-    "heading": "700",
-    "body": "400",
-    "button": "600"
-  },
-  "fontSize": {
-    "heading": 24,
-    "subheading": 18,
-    "body": 14,
-    "button": 16
-  },
-  "lineHeight": {
-    "heading": 1.5,
-    "body": 1.6
-  },
-  "padding": {
-    "section": { "top": 20, "right": 15, "bottom": 20, "left": 15 },
-    "component": { "top": 10, "right": 15, "bottom": 10, "left": 15 }
-  },
-  "borderRadius": 5,
-  "buttonStyle": {
-    "textAlign": "center",
-    "buttonPadding": { "top": 10, "right": 20, "bottom": 10, "left": 20 },
-    "width": 100,
-    "height": 40
-  },
-  "imageStyle": {
-    "width": 100,
-    "objectFit": "cover"
-  }
-}
-
+${JSON.stringify(emailTheme, null, 2)}
 `;
 
  const userMessage = `

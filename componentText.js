@@ -1,6 +1,6 @@
 const { callOpenAI } = require('./openai');
 
-async function generateTextComponent(section) {
+async function generateTextComponent(emailTheme,section) {
   const systemMessage = `
   1. Role
   You are tasked with generating a structured JSON object representing a Text component. Using the provided title, purpose, and summary, extract key meaningful points and create a concise, engaging, and relevant text string for the component’s content (data.props.text). Each component must adhere to the specified theme and formatting rules.
@@ -60,40 +60,8 @@ async function generateTextComponent(section) {
   
   Theme for styling values:
   
-  {
-    "fontFamily": "Arial, sans-serif",
-    "primaryColor": "#0056b3",
-    "secondaryColor": "#e7f1ff",
-    "textColor": "#333333",
-    "backgroundColor": "#ffffff",
-    "headingColor": "#222222",
-    "fontWeight": {
-      "heading": "700",
-      "body": "400",
-      "button": "600"
-    },
-    "fontSize": {
-      "heading": 24,
-      "subheading": 18,
-      "body": 16,
-      "button": 16
-    },
-    "padding": {
-      "section": { "top": 20, "right": 15, "bottom": 20, "left": 15 },
-      "component": { "top": 10, "right": 10, "bottom": 10, "left": 10 }
-    },
-    "borderRadius": 5,
-    "buttonStyle": {
-      "textAlign": "center",
-      "buttonPadding": { "top": 10, "right": 20, "bottom": 10, "left": 20 },
-      "width": 100,
-      "height": 40
-    },
-    "imageStyle": {
-      "width": 100,
-      "objectFit": "cover"
-    }
-  }
+${JSON.stringify(emailTheme, null, 2)}
+
   3. Response Guidelines
   
   Generate and return only the final JSON object.

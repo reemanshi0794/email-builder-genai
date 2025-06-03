@@ -38,7 +38,7 @@ async function processChildComponent(child, section, parentSection, childIndex) 
   return componentJson;
 }
 
-async function processComponentTypes(emailSections) {
+async function processComponentTypes(emailTheme,emailSections) {
   const allComponents = {};
 
   for (const section of emailSections) {
@@ -49,17 +49,18 @@ async function processComponentTypes(emailSections) {
      
 
       if (type === "Text") {
-        componentJson = await generateTextComponent(innersection);
+        componentJson = await generateTextComponent(emailTheme,innersection);
         if (componentJson) Object.assign(allComponents, componentJson);
       } else if (type === "Image") {
-        componentJson = await generateImageComponent(innersection);
+        componentJson = await generateImageComponent(emailTheme,innersection);
         if (componentJson) Object.assign(allComponents, componentJson);
       } else if (type === "Button") {
-        componentJson = await generateButtonComponent(innersection);
+        componentJson = await generateButtonComponent(emailTheme,innersection);
         if (componentJson) Object.assign(allComponents, componentJson);
       } else if (type === "Columns") {
         const columnsComponent = await generateColumnsComponent(innersection);
         const columnsWithProps = await generateColumnsProperties(
+          emailTheme,
           columnsComponent
         );
 
@@ -160,8 +161,7 @@ async function runPipeline() {
     description
   );
   const emailSections = await generateEmailSections(subjectLine);
-  console.log("emailSections",emailSections)
-  const allComponents = await processComponentTypes(emailSections);
+  const allComponents = await processComponentTypes(emailTheme,emailSections);
   const emailLayout = await composeEmailLayout(allComponents);
 
   return {
