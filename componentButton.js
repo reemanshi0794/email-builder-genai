@@ -3,7 +3,6 @@ const { callOpenAI } = require("./openai");
 async function generateButtonComponent(emailTheme,section, parentSection, childIndex) {
  
   const insideGrid = parentSection != null && parentSection.type === 'Columns';
-  console.log("insideGrid",insideGrid, childIndex)
   const columnIndex = childIndex
 
   const systemMessage = `1. Role

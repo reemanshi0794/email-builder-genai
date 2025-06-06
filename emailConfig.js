@@ -4,7 +4,6 @@ module.exports = {
 };
 
 
-
 // The Future of Work: Adapting to a Remote and Hybrid World
 
 // Description:

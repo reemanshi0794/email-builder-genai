@@ -8,6 +8,8 @@ const { generateColumnsComponent } = require("./componentColumns");
 const { generateColumnsProperties } = require("./columnsProperties");
 const { generateNestedColumnsProperties } = require("./nestedColumnProperties");
 const { topic, description } = require("./emailConfig");
+const { generateSpacerComponent } = require("./componentSpacer");
+const { generateDividerComponent } = require("./componentDivider");
 
 const nestedChildrenIds = new Set(); // Track all nested IDs
 
@@ -41,8 +43,6 @@ async function processComponentTypes(emailTheme,emailSections) {
   for (const section of emailSections) {
     for (const innersection of section.content) {
       let componentJson;
- 
-
       const type = innersection ?.componentType;
       innersection.id = section?.id
      
@@ -114,9 +114,11 @@ Object.assign(allComponents, columnComponent);
         columnsWithProps[columnsId].data.childrenIds = actualColumnIds;
         // nestedChildrenIds.add(columnsId); // Also mark the Columns component itself
       } else if (type === "Divider") {
-        console.log("Divider – optionally handle this");
+         componentJson = await generateDividerComponent(emailTheme);
+        if (componentJson) Object.assign(allComponents, componentJson);
       } else if (type === "Spacer") {
-        console.log("Spacer – optionally handle this");
+          componentJson = await generateSpacerComponent(emailTheme);
+        if (componentJson) Object.assign(allComponents, componentJson);
       } else {
         console.warn(`Unknown Component Type: ${type}`);
       }
@@ -127,7 +129,6 @@ Object.assign(allComponents, columnComponent);
 }
 
 async function composeEmailLayout(theme, allComponents) {
-  console.log("nestedChildrenIds",nestedChildrenIds)
 
   const childrenIds = Object.keys(allComponents).filter(
     (id) => !nestedChildrenIds.has(id)
@@ -175,7 +176,7 @@ async function runPipeline() {
   const emailLayout = await composeEmailLayout(emailTheme, allComponents);
 
   return {
-    emailLayout,
+    emailLayout
   };
 }
 
