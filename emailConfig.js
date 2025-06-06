@@ -1,6 +1,6 @@
 module.exports = {
-  topic: "Cart Abandonment Follow-up",
-  description: "Remind the user they left items in their cart and encourage them to complete their purchase with a small discount."
+  topic: "Birthday Email",
+  description: "Send a cheerful birthday greeting with a gift (e.g., discount, free item). Make it feel personal and time-sensitive"
 };
 
 

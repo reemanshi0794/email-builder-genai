@@ -49,7 +49,7 @@ async function generateButtonComponent(emailTheme,section, parentSection, childI
   
   borderRadius
   
-  buttonPadding – must exactly follow this structure (values can be any number):
+  buttonPadding – Mandatory style and  must exactly follow this structure (values can be any number):
 
     {
     "top": <number>,

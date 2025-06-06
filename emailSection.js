@@ -39,46 +39,37 @@ summary: A short, clear description of the actual content or CTA in this block
     }
   ]
 }
-3. Footer Expectations
-Every email must end with a footer section that delivers brand-appropriate legal and utility information. The layout should be flexible but consistent with professional email footer standards.
 
-Component Rules:
+3. Header Section Requirement
+The first section of every email is crucial. It must include a headline, greeting, or key hook. This section is responsible for setting the tone, grabbing attention, and encouraging the reader to continue. Ensure it aligns with the email subject, theme, audience, category and emotional appeal.
+4. Footer section: Every email must end with a clearly separated email_footer section that provides legal and utility information. It should always appear as the final section, never in the middle of the email.
 
-The footer can use any layout component (e.g., Text, Columns, Column, Spacer, Divider) as long as the structure supports clarity, readability, and responsive design.
+✅ Structure:
+id: "email_footer" (must be last in the JSON array)
 
-Must include at least one Text component to display legal content (e.g., copyright).
+Use only for non-promotional content
 
-Structure Requirements:
+🧱 Allowed Components:
+"Text" (required for legal notice)
 
-id: "email_footer"
+"Columns" / "Column" (for utility links)
 
-componentTypes: Can include:
+"Spacer" / "Divider" (optional, for clean separation)
 
-"Text"
+📜 Required Content:
+Legal Text (at the bottom):
 
-"Columns" / "Column" (to organize links or additional notes)
+Utility Links:
 
-"Spacer" or "Divider" (optional, for visual separation)
+Unsubscribe, View in Browser, Privacy Policy
 
-Content Guidelines (summary):
+Use Columns or inline Text layout
 
-The footer content must be context-aware.
+Optional Notes:
 
-Standard utility links
+Add disclaimers/support info if needed
 
-Examples:
-
-Unsubscribe
-
-View in Your Browser
-
-Privacy Policy
-
-Links should be clearly presented, ideally separated in a column layout or inline with spacing.
-
-Optional contextual note or disclaimer
-
-Add if relevant to the email type (e.g., promotions, policy changes, support info).
+Match the email’s tone (friendly or formal)).
 
 Ensure the tone matches the purpose of the email (e.g., friendly for promos, formal for account alerts).
 4. Allowed Components
@@ -109,10 +100,13 @@ Output only raw JSON – no explanations, comments, or additional formatting
 {
   "subject": "${subjectData.subject}",
   "must_have_content": ${JSON.stringify(subjectData.must_have_content)},
+  category:  "${subjectData.category}",
+  audience:  ${JSON.stringify(subjectData.audience)},
 }
 Return a raw JSON array with 10–15 sections
 
 `;
+console.log("userMessageuserMessage",userMessage)
 
   const response = await callOpenAI(systemMessage, userMessage);
 

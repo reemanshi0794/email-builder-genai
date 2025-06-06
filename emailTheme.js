@@ -1,13 +1,13 @@
 const { callOpenAI } = require('./openai');
 
-async function generateEmailTheme(emailSubject,topic, description) {
+async function generateEmailTheme(subjectData,topic, description,emailSections) {
   const systemMessage = `
 1. Role
-You are a professional email design assistant. Your task is to generate a single JSON object that defines a cohesive visual theme for a marketing email. The theme should be tailored to the user’s provided topic and description, ensuring that all sections of the email follow a consistent and visually appealing style.
+You are an expert email theme designer. Your task is to generate a cohesive and visually compelling theme JSON for a marketing email. The theme must align with the user's provided topic, description, and content sections, helping the email stand out, attract attention, and deliver content effectively.
+
 
 2. Capabilities
-Based on the given topic and description, you will create a theme JSON that specifies unified values for fonts, colors, spacing, and visual tone. These values must work together to support a consistent and polished design across every component of the email — including headings, body text, buttons, images, and layout sections.
-
+Use the topic, description, and intended purpose of the email to define a unified design system that enhances readability, emphasizes key content, and encourages user interaction. Your theme must include typography, color palette, spacing, and component styling that look attractive, consistent, and on-brand.
 Your output must follow the exact structure below:
 {
   "fontFamily": "string",       
@@ -57,8 +57,9 @@ Your output must follow the exact structure below:
 
 
 3. Response Guidelines
-Base all values on the user’s topic and description to ensure relevance and visual alignment
-Return only the theme JSON — no additional commentary or formatting
+- Tailor all values based on the topic, description, and section content to create a theme that enhances emotional impact and supports the message's tone (e.g., cheerful for birthdays, sleek for product launches, urgent for cart abandonment).
+- Use visually appealing and user-attracting colors that create clear contrast between background, text, and buttons.
+- Return only the theme JSON — no additional commentary or formatting
 Use proper value formats:
 
 fontWeight values must be numeric strings (e.g., "400", "700")
@@ -68,9 +69,12 @@ Do not include any layout structure, content, or component declarations
 
 `;
 
-  const userMessage = `Email Subject: ${emailSubject}
+  const userMessage = `Email Subject: ${subjectData?.subject}
 Topic: ${topic}
-Description: ${description}
+Description: ${description},
+Email sections: ${emailSections},
+ category:  "${subjectData.category}",
+  audience:  ${JSON.stringify(subjectData.audience)},
 
 Generate a cohesive email theme JSON using the structure provided in the system message.
 `;

@@ -10,7 +10,7 @@ You are an AI assistant that helps generate subject lines, essential content poi
 You generate responses based on a topic and a short description provided by the user.
 Your output always follows a strict JSON structure to ensure consistency and easy parsing.
 You focus on making email content clear, concise, professional, and relevant to the given topic
-
+You tailor your response based on inferred communication intent, email type, and audience needs.
 3. Response Guidelines
 Output Format:
 Always respond in the following JSON format:
@@ -23,7 +23,12 @@ Always respond in the following JSON format:
   "keywords": [
     "string",
     "string"
-  ]
+  ],
+  "category": "string",
+  "audience": [
+        "string",
+        "string"
+      ]
 }
 
 Field Requirements:
@@ -33,6 +38,10 @@ Field Requirements:
 2.must_have_content: Include 2 to 4 short strings that describe the key things the email should cover. This must always be an array of strings.
 
 3. keywords: Include 3 to 6 important words or phrases that should appear in the email body (for clarity, relevance, and SEO).
+
+4.category: Type of email most appropriate for the topic (e.g., newsletter, announcement, product update).",
+
+5. audience: 1–3 segments that best describe who the email is for (e.g., [\"startups\", \"enterprise decision-makers\"])."
 
 General Constraints:
 
@@ -44,6 +53,7 @@ General Constraints:
   const userMessage = `Topic: ${topic}\nDescription: ${description}`;
 
   const response = await callOpenAI(systemMessage, userMessage);
+  console.log("email subject",response)
 
   try {
     return JSON.parse(response);
