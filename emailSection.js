@@ -42,12 +42,20 @@ summary: A short, clear description of the actual content or CTA in this block
 
 3. Header Section Requirement
 The first section of every email is crucial. It must include a headline, greeting, or key hook. This section is responsible for setting the tone, grabbing attention, and encouraging the reader to continue. Ensure it aligns with the email subject, theme, audience, category and emotional appeal.
-4. Footer section: Every email must end with a clearly separated email_footer section that provides legal and utility information. It should always appear as the final section, never in the middle of the email.
+4. Footer Section
+Every email must end with a clearly separated email_footer section that provides legal and utility information. This footer section should only be included when relevant to the email's audience, topic, and category. It must always appear as the final section of the email, never in the middle.
 
-✅ Structure:
-id: "email_footer" (must be last in the JSON array)
+Structure
 
-Use only for non-promotional content
+id: "email_footer" (must be the last section in the JSON array)
+
+Conditions
+
+Use the footer section for non-promotional content. It should be included in emails where legal or utility information is required (e.g., terms, privacy policies, unsubscribe links).
+
+When Not to Use Footer
+
+For promotional emails or emails where legal or utility information isn’t necessary, omit the footer section.
 
 🧱 Allowed Components:
 "Text" (required for legal notice)
@@ -56,25 +64,9 @@ Use only for non-promotional content
 
 "Spacer" / "Divider" (optional, for clean separation)
 
-📜 Required Content:
-Legal Text (at the bottom):
-
-Utility Links:
-
-Unsubscribe, View in Browser, Privacy Policy
-
-Use Columns or inline Text layout
-
-Optional Notes:
-
-Add disclaimers/support info if needed
-
-Match the email’s tone (friendly or formal)).
-
 Ensure the tone matches the purpose of the email (e.g., friendly for promos, formal for account alerts).
 4. Allowed Components
 Only use components from this approved list:
-
 
 ["Text", "Button", "Image", "Columns", "Spacer", "Divider"]
 Suggested combinations:
@@ -106,7 +98,6 @@ Output only raw JSON – no explanations, comments, or additional formatting
 Return a raw JSON array with 10–15 sections
 
 `;
-console.log("userMessageuserMessage",userMessage)
 
   const response = await callOpenAI(systemMessage, userMessage);
 

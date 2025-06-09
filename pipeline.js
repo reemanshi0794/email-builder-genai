@@ -13,16 +13,16 @@ const { generateDividerComponent } = require("./componentDivider");
 
 const nestedChildrenIds = new Set(); // Track all nested IDs
 
-async function processChildComponent(emailTheme,  section, parentSection, childIndex) {
+async function processChildComponent(subjectLine, emailTheme,  section, parentSection, childIndex) {
 
   let componentJson = {};
   if (section.type === "Text") {
      console.log("processChildComponentsection",section)
 
-    componentJson = await generateTextComponent(emailTheme, {
+    componentJson = await generateTextComponent(subjectLine, emailTheme,{
       ...section,
       content: section.content,
-    });
+    },parentSection);
   } else if (section.type === "Image") {
     componentJson = await generateImageComponent(emailTheme,section);
   } else if (section.type === "Button") {
@@ -37,7 +37,7 @@ async function processChildComponent(emailTheme,  section, parentSection, childI
   return componentJson;
 }
 
-async function processComponentTypes(emailTheme,emailSections) {
+async function processComponentTypes(subjectLine, emailTheme,emailSections) {
   const allComponents = {};
 
   for (const section of emailSections) {
@@ -48,7 +48,7 @@ async function processComponentTypes(emailTheme,emailSections) {
      
 
       if (type === "Text") {
-        componentJson = await generateTextComponent(emailTheme,innersection);
+        componentJson = await generateTextComponent(subjectLine, emailTheme,innersection);
         if (componentJson) Object.assign(allComponents, componentJson);
       } else if (type === "Image") {
         componentJson = await generateImageComponent(emailTheme,innersection);
@@ -93,7 +93,7 @@ Object.assign(allComponents, columnComponent);
               console.log("innersection",innersection)
               const childObject = {...child, id:innersection.id}
 
-              const generated = await processChildComponent(emailTheme, childObject,columnsWithProps[columnsId],childIndex);
+              const generated = await processChildComponent(subjectLine, emailTheme, childObject,columnsWithProps[columnsId],childIndex);
               Object.assign(allComponents, generated);
 
               const generatedId = Object.keys(generated)[0];
@@ -171,7 +171,7 @@ async function runPipeline() {
   console.log("emailSectionsemailSections",emailSections)
     console.log("emailThemeemailTheme",emailTheme)
 
-  const allComponents = await processComponentTypes(emailTheme,emailSections);
+  const allComponents = await processComponentTypes(subjectLine, emailTheme,emailSections);
 
   const emailLayout = await composeEmailLayout(emailTheme, allComponents);
 

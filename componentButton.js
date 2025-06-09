@@ -27,6 +27,8 @@ async function generateButtonComponent(emailTheme,section, parentSection, childI
   
   text - Text should be short and action-oriented (ideally under 20 characters).
   Avoid wrapping; use imperative verbs (e.g., “Get Started”, “View Deals”).
+Use imperative verbs (e.g., “Get Started”, “View Deals”).
+Text must not be too large in content or character count.
 
   navigateToUrl
   
@@ -38,8 +40,8 @@ async function generateButtonComponent(emailTheme,section, parentSection, childI
   
   fontFamily
   
-  fontSize
-  
+  fontSize — must not exceed 14
+
   textAlign
   
   buttonColor - Use primary color value from the theme 

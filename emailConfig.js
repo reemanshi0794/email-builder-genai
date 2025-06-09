@@ -1,6 +1,6 @@
 module.exports = {
-  topic: "Birthday Email",
-  description: "Send a cheerful birthday greeting with a gift (e.g., discount, free item). Make it feel personal and time-sensitive"
+  topic: "Client Onboarding Welcome Email",
+  description: "Send this email to new clients after they sign up. The tone should be warm and professional. Include a personalized welcome message, brief next steps, contact details of the account manager, and helpful resources to get started."
 };
 
 
