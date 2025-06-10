@@ -1,6 +1,6 @@
 module.exports = {
-  topic: "Client Onboarding Welcome Email",
-  description: "Send this email to new clients after they sign up. The tone should be warm and professional. Include a personalized welcome message, brief next steps, contact details of the account manager, and helpful resources to get started."
+  topic: "Remote Work vs Office Work: Which Model Works Best in 2025?",
+  description: "As hybrid models continue to evolve, the debate between remote work and traditional office setups is far from over. This email explores the core differences between the two models, outlining their unique benefits, challenges, and long-term impact on productivity, collaboration, and company culture. Whether you're a business leader or employee, understanding these dynamics is key to shaping a sustainable work future."
 };
 
 

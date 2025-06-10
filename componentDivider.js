@@ -6,8 +6,7 @@ const { callOpenAI } = require('./openai');
 
 async function generateDividerComponent(emailTheme) {
 
-const systemMessage = `
-You generate clean, valid JSON layout components based on user input and a shared theme. This message applies specifically to the Divider component.
+const systemMessage = `You generate clean, valid JSON layout components based on user input and a shared theme. This message applies specifically to the Divider component.
 
 RULES
 
@@ -71,8 +70,7 @@ Replace uniqueId with a real ID in the format timestamp-randomString-hash.
 Use this Theme JSON for all styling decisions:
 ${JSON.stringify(emailTheme, null, 2)}
 
-Divider is a visual separator only. Return a layout-safe JSON object with no extra or interactive content.
-`
+Divider is a visual separator only. Return a layout-safe JSON object with no extra or interactive content.`
 ;
 
 const userMessage = `
@@ -81,6 +79,7 @@ Insert a divider to visually separate layout regions. Use "horizontal" orientati
 
 
   const response = await callOpenAI(systemMessage, userMessage);
+  console.log("divider response",response)
 
   try {
     return JSON.parse(response);

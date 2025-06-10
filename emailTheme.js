@@ -23,16 +23,14 @@ Apply visual hierarchy through color, spacing, and font weight
 Design clear, visually distinctive elements for CTAs, headers, buttons, etc.
 
 Color Mapping Rules (Dynamic, No Hardcoded Values):
+Generate color values dynamically for each email based on category and tone, avoiding flat or overly bright combinations. All colors must be web-safe and accessible.
 
-primaryColor → For key elements like CTAs, headlines, and emphasis
-
-secondaryColor → For links, subheadings, hover states
-
-backgroundColor → For base layout or section backgrounds
-
-textColor → For main paragraph/body content
-
-headingColor → For titles, large text, or visually distinct statements
+"primaryColor"      → CTAs, headlines, buttons (bold/strong tone)
+"secondaryColor"    → Links, subheadings, icons (contrasting but softer)
+"textColor"         → Main paragraph/body text (must contrast with background)
+"headingColor"      → Titles, large text blocks (darker than textColor)
+"backgroundColor"   → Section and email background (visually pleasing and readable)
+✅ Use attractive background colors such as soft tones, warm neutrals, or muted gradients (e.g., #FAFAFA, #F0F4F9, #FDF6F0, #ECEFF1)
 
 Accessibility & Contrast Rule:
 Always ensure strong contrast between text and background. If backgroundColor is light (e.g., #FFFFFF or soft tones), avoid pastel or light-colored text. Use darker theme tones (e.g., textColor, #333333) for clarity and legibility.
@@ -43,12 +41,17 @@ Output must be a single JSON object following this exact structure:
 
 {
   "fontFamily": "string",
-    "primaryColor": "string",    -  Use for buttons, important icons, or CTAs
-  "secondaryColor": "string",   - Use for subheadings, links, highlights
-  "textColor": "string",        - Use for section or full email background
-  "backgroundColor": "string",  - For main headings and important labels
-  "headingColor": "string",   - For paragraph body text and secondary info  
-
+  "colors": {
+    "background": "string",         // Global email background (e.g., "#ffffff" or "#f8f9fa")
+    "sectionBackground": "string",  // Default background for individual sections (optional override)
+    "textBackground": "string",     // Background behind text blocks for contrast
+    "primary": "string",            // CTA buttons, icons (e.g., "#0ABAB5")
+    "secondary": "string",          // Subheadings, links (e.g., "#56DFCF")
+    "text": "string",               // Body text and general content 
+    "heading": "string",            // Headings (e.g., "#111111")
+    "highlight": "string"           // For emphasis or alerts (e.g., "#FFD700")
+  },
+   
   "fontWeight": {
     "heading": "700",
     "body": "400",

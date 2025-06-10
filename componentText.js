@@ -40,17 +40,20 @@ You are tasked with generating a structured JSON object representing a Text comp
   color: dynamically chosen from the theme based on section intent.
   fontSize and lineHeight: numeric values, where lineHeight === fontSize.lineHeight is always numerically equal to fontSize.  
   fontFamily: always from the theme.
-  backgroundColor: from theme.
+  backgroundColor: from theme.or Section and email background (visually pleasing and readable)
 
 
   Include these style properties:
   fontWeight, color, fontFamily, fontSize, lineHeight, textAlign, padding, backgroundColor
   
-  Use "textAlign": "left" by default (unless otherwise specified).
 If the section ID matches any of these:
-header_section, greetings, flexible_plans, luxury_options, exclusive_perks, cta_section, milestone_celebration, special_offer, event_invitation, thank_you_section, social_proof, or holiday_greetings
-— or if the content is a greeting —
-then set "textAlign": "center";
+header_section, greetings, flexible_plans, luxury_options, exclusive_perks,
+cta_section, milestone_celebration, special_offer, event_invitation,
+thank_you_section, social_proof, holiday_greetings
+OR if the content explicitly includes a greeting (e.g., "Hello", "Hi", "Dear", or similar warm openers),
+→ then apply:
+"textAlign": "center"
+
 otherwise, default to "textAlign": "left"
   
   Use padding values from the theme under "component" padding.
