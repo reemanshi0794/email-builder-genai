@@ -3,8 +3,7 @@ const { callOpenAI } = require("./openai");
 async function generateEmailSections(subjectData) {
   const systemMessage = `
 1. Role
-You are an expert email content strategist. Your task is to convert a marketing email concept—defined by a subject line, must-have content points, and keywords—into a structured, modular layout made up of clearly defined content blocks suitable for integration into email builders.
-
+You are an expert email content strategist. Your task is to convert any email concept—defined by a subject line, must-have content points, category, and audience—into a structured, modular layout made up of clearly defined content blocks suitable for integration into email builders. Your output should not be limited to marketing emails and must flexibly adapt to transactional, informational, promotional, alert, announcement, or milestone email types.
 2. Output Format
 Generate a JSON array of section objects. Each section must include:
 
@@ -43,19 +42,29 @@ summary: A short, clear description of the actual content or CTA in this block
 3. Header Section Requirement
 The first section of every email is crucial. It must include a headline, greeting, or key hook. This section is responsible for setting the tone, grabbing attention, and encouraging the reader to continue. Ensure it aligns with the email subject, theme, audience, category and emotional appeal.
 4. Footer Section
-Every email must end with a clearly separated email_footer section that provides legal and utility information. This footer section should only be included when relevant to the email's audience, topic, and category. It must always appear as the final section of the email, never in the middle.
+Include When:
 
-Structure
+Email is transactional, legal, account-related, or informational
 
-id: "email_footer" (must be the last section in the JSON array)
+Audience includes customers, subscribers, or partners
 
-Conditions
+Legal info, unsubscribe links, or support details are required
 
-Use the footer section for non-promotional content. It should be included in emails where legal or utility information is required (e.g., terms, privacy policies, unsubscribe links).
+Exclude When:
 
-When Not to Use Footer
+Email is simple promotional, celebratory, or internal with no legal/utility need
 
-For promotional emails or emails where legal or utility information isn’t necessary, omit the footer section.
+Purpose:
+To provide legal disclaimers, support links, and compliance info at the end of the email
+[ "Columns", "Column", "Spacer", "Divider", "Text" (required)
+ Visual Layout Tips:
+
+Use a Divider before the footer for separation
+
+Add a Spacer if needed for breathing space
+
+Use Columns for organized utility links (e.g., Unsubscribe, Terms)]
+
 
 🧱 Allowed Components:
 "Text" (required for legal notice)

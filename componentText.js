@@ -6,7 +6,7 @@ async function generateTextComponent(
   section,
   parentSection
 ) {
-  console.log("texttttexttt",subjectLine,  parentSection, section);
+  console.log("texttttexttt", subjectLine, parentSection, section);
   const systemMessage = `
   1. Role
 You are tasked with generating a structured JSON object representing a Text component for an email layout. Using the provided title, purpose, and summary, craft a concise, compelling, and relevant text string for the component's data.props.text. The text must align with the section's intent and be visually engaging.  
@@ -77,17 +77,10 @@ otherwise, default to "textAlign": "left"
   "text": A compelling, relevant, and well-crafted content string derived from the title, purpose, and summary (required).
   
   "navigateToUrl": Optional — set to an empty string if not provided.
-  | Section ID        | Suggested Style                                               |
-| ----------------- | ------------------------------------------------------------- |
-| "header_section"  | Bold, large text, "headingColor", size "24", weight "700   |
-| "introduction"    | Neutral tone, "textColor", size "16", weight "400"         |
-| "flexible_plans"  | Highlighted text, "secondaryColor", size "18", weight "600" |
-| "luxury_options"  | Premium feel, "secondaryColor", size "18", weight "600"    |
-| "exclusive_perks" | Elevated tone, "primaryColor", size "18", weight "600"      |
-| "cta_section"     | Strong CTA, "primaryColor", size "24", weight "700"         |
-| "testimonials"    | Soft tone, "textColor", size "16", weight "400"           |
-| "conclusion"      | Wrapping tone, "textColor", size "16", weight "400"         |
-| "email_footer"    | Low emphasis, "textColor", size "14", weight ""300"          |
+
+CAPITALIZATION RULE
+Use uppercase words or phrases only when it:
+Highlights urgency (e.g., "LIMITED TIME")
 
 Visual Accessibility Rule (Applies to All Email Types)
 To ensure that your email content is readable and accessible across all devices and user settings, always maintain high contrast between text and background colors.
@@ -140,7 +133,7 @@ ${JSON.stringify(
 `;
 
   const response = await callOpenAI(systemMessage, userMessage);
-  console.log("text ress",response)
+  console.log("text ress", response);
   try {
     return JSON.parse(response);
   } catch (e) {

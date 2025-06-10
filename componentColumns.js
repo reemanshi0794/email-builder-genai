@@ -17,6 +17,9 @@ async function generateColumnsComponent(section) {
   Each Column must contain a combination of different allowed component types to create rich, visually engaging, and meaningful content aligned with the section’s title, purpose, and summary. Avoid using only text components.
   Ensure every component inside a Column includes:
 type, title, purpose, summary
+When content is list-like or structured, add "bullet": true to Text components.
+
+
 
 summary
   Allowed component types inside a Column:
@@ -24,7 +27,7 @@ summary
   
   Use these component types thoughtfully:
   
-  Text: Use for headings, highlights, descriptions
+  Text: Use for headings, highlights, descriptions. Add "bullet": true when needed.
   
   Button – For CTAs like “Learn More”, “Buy Now”
   
