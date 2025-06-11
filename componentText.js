@@ -35,7 +35,7 @@ Using the provided title, purpose, and summary, craft a concise, compelling, and
       }
     }
   }
-  Styling Rules  (inside data.style):
+* Styling Rules  (inside data.style):
  You must include all of the following properties:
 
 "fontWeight": One of "400", "600", or "700" (as a string)
@@ -72,8 +72,11 @@ OR if the content explicitly includes a greeting (e.g., "Hello", "Hi", "Dear", o
 "left": <number>
 }
 - backgroundColor
+"customCss" (optional):
+If additional CSS properties need to be applied beyond the defined style schema, include them as a single string in the "customCss" field, e.g.
+"customCss": "background:red;color:blue;"
 
-  Props Requirements (inside data.props):
+* Props Requirements (inside data.props):
   
   "text": A compelling, relevant, and well-crafted content string derived from the title, purpose, and summary (required).
   
@@ -134,6 +137,7 @@ ${JSON.stringify(
 `;
 
   const response = await callOpenAI(systemMessage, userMessage);
+
   try {
     return JSON.parse(response);
   } catch (e) {

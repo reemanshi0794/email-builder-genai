@@ -21,23 +21,35 @@ When content is list-like or structured, add "bullet": true to Text components.
 
 
 
-summary
-  Allowed component types inside a Column:
+
+### ✳️ Allowed Component Types Inside a Column:
   ["Text", "Button", "Image", "Spacer", "Divider", "Columns"]
   
   Use these component types thoughtfully:
-  
-  Text: Use for headings, highlights, descriptions. Add "bullet": true when needed.
-  
-  Button – For CTAs like “Learn More”, “Buy Now”
-  
-  Image – For product shots, icons
-✅ Use: type, imageUrl, alt (optional)
-  Spacer: Vertical spacing for readability
-  
-  Divider: Visual separation of content blocks
-  
-  Columns: For nested column layouts
+  - Text: Use for headings, highlights, descriptions. Add "bullet": true when needed.
+  - Button – For CTAs like “Learn More”, “Buy Now”
+  - Image – For product shots, icons
+✅  Use: type, imageUrl, alt (optional)
+  - Spacer: Vertical spacing for readability
+  - Divider: Visual separation of content blocks
+  - Columns: For nested column layouts
+
+  🧩 Special Rule — Footer Section Handling
+If ${section?.id
+    .toLowerCase()
+    .includes("footer")}, follow email footer conventions:
+
+✅ Include 2–4 columns typically structured as:
+- **Column 1**: Company name, logo (Image), and description (Text)
+- **Column 2**: Contact details (Text bullets, "bullet": true)
+- **Column 3**: Useful links — e.g., "View in browser", "Privacy Policy", "Help Center" (Text with props.navigateToUrl)
+- **Column 4** *(optional)*: "Unsubscribe" (Button or Text with link)
+
+✅ Anchor-style links should use "Text" or "Button" with "props.navigateToUrl".
+
+✅ Use short and clear titles like “Contact Us”, “Unsubscribe”, “Legal”, etc.
+
+✅ Ensure visual spacing and divider usage improves clarity.
   
   Response Guidelines
   
