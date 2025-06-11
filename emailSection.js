@@ -125,7 +125,6 @@ Emphasize clarity, modularity, and email builder compatibility
 
 Output only raw JSON – no explanations, comments, or additional formatting
 `;
-console.log("subjectDatasubjectData",subjectData);
   const userMessage = `
 {
   "subject": "${subjectData.subject}",
@@ -138,7 +137,6 @@ Return a raw JSON array with 10–15 sections
 `;
 
   const response = await callOpenAI(systemMessage, userMessage);
-console.log("response11",response);
 
   try {
     return JSON.parse(response);

@@ -1,11 +1,16 @@
 const { callOpenAI } = require("./openai");
 
-async function generateButtonComponent(emailTheme,section, parentSection, childIndex) {
- 
-  const insideGrid = parentSection != null && parentSection.type === 'Columns';
-  const columnIndex = childIndex
+async function generateButtonComponent(
+  emailTheme,
+  section,
+  parentSection,
+  childIndex
+) {
+  const insideGrid = parentSection != null && parentSection.type === "Columns";
+  const columnIndex = childIndex;
 
-  const systemMessage = `1. Role
+  const systemMessage = `
+  1. Role
   You are an AI assistant tasked with generating a valid JSON object for a Button component in a modular email layout system. Your responsibility is to construct the component using the user’s input and a predefined design theme, ensuring consistency, structure, and reusability across all buttons.
   
   2. Capabilities
@@ -50,14 +55,15 @@ Text must not be too large in content or character count.
   
   borderRadius
   
-  buttonPadding – Mandatory style and  must exactly follow this structure (values can be any number):
-
+  buttonPadding (Mandatory style) :
+  Use this format for buttonPadding:
     {
     "top": <number>,
     "right": <number>,
     "bottom": <number>,
     "left": <number>
   }
+  buttonPadding is strongly recommended and normally mandatory.
   Width, height, and wrapping rules based on whether the button is inside a Columns grid:
   If the button is inside a Columns grid (i.e., parentSection is not null and parentSection.type is 'Columns', or ${insideGrid} is true), then:
 
@@ -77,7 +83,6 @@ Otherwise (no parentSection or different type):
 
 Width must be calculated dynamically based on the length of data.props.text and theme.fontSize.button, including horizontal padding. Do not use the static theme.buttonStyle.width.
 
-  padding
   Use the following theme JSON for consistent styles:
   ${JSON.stringify(emailTheme, null, 2)}
   

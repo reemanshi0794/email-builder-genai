@@ -157,7 +157,6 @@ Return only the raw JSON—no markdown or explanations
 `;
 
   const response = await callOpenAI(systemMessage, userMessage);
-  console.log("responseresponse", response);
   try {
     return JSON.parse(response);
   } catch (e) {

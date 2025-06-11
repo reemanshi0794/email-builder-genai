@@ -134,7 +134,6 @@ ${JSON.stringify(
 `;
 
   const response = await callOpenAI(systemMessage, userMessage);
-  console.log("text ress", response);
   try {
     return JSON.parse(response);
   } catch (e) {

@@ -79,7 +79,6 @@ Insert a divider to visually separate layout regions. Use "horizontal" orientati
 
 
   const response = await callOpenAI(systemMessage, userMessage);
-  console.log("divider response",response)
 
   try {
     return JSON.parse(response);
