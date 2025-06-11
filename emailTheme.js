@@ -47,7 +47,6 @@ Output must be a single JSON object following this exact structure:
     "textBackground": "string",     // Background behind text blocks for contrast
     "primary": "string",            // CTA buttons, icons (e.g., "#0ABAB5")
     "secondary": "string",          // Subheadings, links (e.g., "#56DFCF")
-    "text": "string",               // Body text and general content 
     "heading": "string",            // Headings (e.g., "#111111")
     "highlight": "string"           // For emphasis or alerts (e.g., "#FFD700")
   },

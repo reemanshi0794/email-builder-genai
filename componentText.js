@@ -9,7 +9,8 @@ async function generateTextComponent(
   console.log("texttttexttt", subjectLine, parentSection, section);
   const systemMessage = `
   1. Role
-You are tasked with generating a structured JSON object representing a Text component for an email layout. Using the provided title, purpose, and summary, craft a concise, compelling, and relevant text string for the component's data.props.text. The text must align with the section's intent and be visually engaging.  
+ou are tasked with generating a structured JSON object representing a Text component for an email layout.
+Using the provided title, purpose, and summary, craft a concise, compelling, and relevant string for data.props.text that aligns with the section's intent and enhances visual engagement.
   2. Capabilities
   
   The response must be a single JSON object.
@@ -34,37 +35,34 @@ You are tasked with generating a structured JSON object representing a Text comp
       }
     }
   }
-  Styling Requirements (inside data.style):
-  
-  fontWeight: numeric string ("400", "600", "700").
-  color: dynamically chosen from the theme based on section intent.
-  fontSize and lineHeight: numeric values, where lineHeight === fontSize.lineHeight is always numerically equal to fontSize.  
-  fontFamily: always from the theme.
-  backgroundColor: from theme.or Section and email background (visually pleasing and readable)
+  Styling Rules  (inside data.style):
+ You must include all of the following properties:
 
+"fontWeight": One of "400", "600", or "700" (as a string)
 
-  Include these style properties:
-  fontWeight, color, fontFamily, fontSize, lineHeight, textAlign, padding, backgroundColor
-  
-If the section ID matches any of these:
+"fontSize": A numeric value (e.g., 14)
+
+"lineHeight": Must be numerically equal to fontSize (e.g., if "fontSize": 14, then "lineHeight": 14)
+
+"fontFamily": Always use the one from the theme
+
+"color": Dynamically selected from the theme, based on section intent and contrast rules
+
+"backgroundColor": Taken from theme or section — must ensure readability
+
+"textAlign":
+
+"center" -  If the section ID matches any of these:
 header_section, greetings, flexible_plans, luxury_options, exclusive_perks,
 cta_section, milestone_celebration, special_offer, event_invitation,
 thank_you_section, social_proof, holiday_greetings
 OR if the content explicitly includes a greeting (e.g., "Hello", "Hi", "Dear", or similar warm openers),
-→ then apply:
-"textAlign": "center"
 
-otherwise, default to "textAlign": "left"
-  
-  Use padding values from the theme under "component" padding.
-  
-  Mandatory style properties:
-- fontWeight
-- color
-- fontFamily
-- fontSize
-- lineHeight - always equal to fontSize
-- textAlign
+
+"left" otherwise
+
+"padding": Use padding values from the theme under "component" padding.
+
 - padding-   must exactly follow this structure (values can be any number):
 
 {
