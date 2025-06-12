@@ -1,5 +1,38 @@
 const { callOpenAI } = require("./openai");
 
+function buildSafeButton(ai) {
+  const style = ai?.data?.style || {};
+  const props = ai?.data?.props || {};
+
+  return {
+    type: "Button",
+    data: {
+      style: {
+        fontWeight: style.fontWeight || "600",
+        fontFamily: style.fontFamily || "Arial, sans-serif",
+        fontSize: style.fontSize || 14,
+        textAlign: style.textAlign || "center",
+        buttonColor: style.buttonColor || "#4A90E2",
+        color: style.color || "#FFFFFF",
+        borderRadius: style.borderRadius ?? 5,
+        buttonPadding: style.buttonPadding || {
+          top: 10,
+          right: 20,
+          bottom: 10,
+          left: 20,
+        },
+        ...(style.whiteSpace && { whiteSpace: style.whiteSpace }),
+        ...(style.customCss && { customCss: style.customCss }),
+      },
+      props: {
+        text: props.text || "Click Here",
+        navigateToUrl: props.navigateToUrl || "#",
+        textAlign: props.textAlign || "center",
+      },
+    },
+  };
+}
+
 async function generateButtonComponent(
   emailTheme,
   section,
@@ -7,7 +40,6 @@ async function generateButtonComponent(
   childIndex
 ) {
   const insideGrid = parentSection != null && parentSection.type === "Columns";
-  const columnIndex = childIndex;
 
   const systemMessage = `
   1. Role
@@ -127,11 +159,18 @@ no extra explanations needed
 `;
 
   const response = await callOpenAI(systemMessage, userMessage);
+
   try {
-    return JSON.parse(response);
+    const parsed = JSON.parse(response);
+    const uniqueId = Object.keys(parsed)[0];
+    const aiComponent = parsed[uniqueId];
+    const buttonComponent = buildSafeButton(aiComponent);
+    const result = { [uniqueId]: buttonComponent };
+    console.log("Final Button Component:", JSON.stringify(result, null, 2));
+    return result;
   } catch (e) {
-    throw new Error(`Failed to parse JSON from AI response: ${response}`);
+    console.warn("Failed to parse AI response. Using fallback.");
+    return { fallback: buildSafeButton(null) };
   }
 }
-
 module.exports = { generateButtonComponent };
