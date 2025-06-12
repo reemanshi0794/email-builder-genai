@@ -101,8 +101,13 @@ If style is missing or partial:
 Default padding to { "top": 0, "right": 0, "bottom": 0, "left": 0 }
 
 Default backgroundColor to ""
+verticalAlign - apply the default behavior based on section layout intent:
 
-Include verticalAlign only if present in the input
+| Case    | When to Apply                                                                               | Value      |
+| ------- | ------------------------------------------------------------------------------------------- | ---------- |
+| Default | Always when missing                                                                         | "top"  |
+| Middle  | If the content needs to be visually centered and there’s vertical space above and below     | "middle" |
+| Bottom  | If the section is meant to appear at the bottom of the email or aligned with footer visuals | "bottom" |
 
 Children Handling:
 

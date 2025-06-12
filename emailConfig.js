@@ -1,6 +1,6 @@
 module.exports = {
-  topic: "Remote Work vs Office Work: Which Model Works Best in 2025?",
-  description: "As hybrid models continue to evolve, the debate between remote work and traditional office setups is far from over. This email explores the core differences between the two models, outlining their unique benefits, challenges, and long-term impact on productivity, collaboration, and company culture. Whether you're a business leader or employee, understanding these dynamics is key to shaping a sustainable work future."
+  topic: "Monthly Product Highlights",
+  description: "Showcase 3–5 top-rated or trending products of the month, including short descriptions, star ratings, and direct links to learn more or purchase."
 };
 
 

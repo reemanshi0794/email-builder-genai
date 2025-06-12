@@ -163,7 +163,7 @@ async function composeEmailLayout(theme, allComponents) {
       type: "EmailLayout",
       data: {
         style: {
-          canvasColor: theme?.colors?.backgroundColor,
+          canvasColor: theme?.colors?.background,
           textColor: theme?.colors?.text,
           fontFamily: theme.fontFamily,
           padding: {
