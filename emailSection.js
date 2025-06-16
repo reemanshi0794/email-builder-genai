@@ -20,7 +20,7 @@ This system must support all email types, including:
 - A content array containing one object per componentUse "Text" in every section to convey key messages.
 Approved Components
 Use only these components:
-["Text", "Button", "Image", "Columns", "Column", "Spacer", "Divider"]
+["Text", "Button", "Image", "Columns", "Spacer", "Divider"]
 Use only these 7 components in layouts:
 Text – For inserting text content. Always required.
 Image – For adding illustrative or branding visuals.
@@ -28,7 +28,6 @@ Button – For actions such as CTAs (e.g., “Shop Now” or “Verify Email”)
 Divider – To visually separate sections or logical blocks.
 Spacer – To create breathing room between content blocks.
 Columns – For multi-column layouts (e.g., side-by-side comparisons).
-Column – A single column unit within a "Columns" layout.
 
 
 -Include "Image" components when visual context or appeal enhances understanding (e.g., for highlights, promotions, illustrations, confirmation visuals).
@@ -46,7 +45,7 @@ Use combinations based on email type and intent:
 | CTA or Instruction           | ["Text", "Button"]                                 |
 | Comparisons / Feature Blocks | ["Columns", "Text", "Image"]                       |
 | Structured Layout / Grouping | ["Columns", "Text"]                                |
-| Footer (legal/support)       | ["Columns", "Column", "Text", "Spacer", "Divider"] |
+| Footer (legal/support)       | ["Columns", "Text", "Spacer", "Divider"] |
 
 
 3. Response Guidelines
