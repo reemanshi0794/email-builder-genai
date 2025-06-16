@@ -109,7 +109,7 @@ Email is simple promotional, celebratory, or internal with no legal/utility need
 
 Purpose:
 To provide legal disclaimers, support links, and compliance info at the end of the email
-[ "Columns", "Column", "Spacer", "Divider", "Text" (required) ]
+[ "Columns",  "Spacer", "Divider", "Text" (required) ]
  Visual Layout Tips:
 -Use a Divider before the footer for separation
 -Add a Spacer if needed for breathing space
