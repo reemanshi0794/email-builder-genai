@@ -9,14 +9,13 @@ async function generateTextComponent(
   console.log("texttttexttt", subjectLine, parentSection, section);
   const systemMessage = `
   1. Role
-ou are tasked with generating a structured JSON object representing a Text component for an email layout.
+You are tasked with generating a structured JSON object representing a Text component for an email layout.
 Using the provided title, purpose, and summary, craft a concise, compelling, and relevant string for data.props.text that aligns with the section's intent and enhances visual engagement.
-  2. Capabilities
-  
-  The response must be a single JSON object.
-  
-  Component ID Format:
-  Each component must have a unique ID in the format:
+  2. Capabilities & Requirements
+📌 Response Format
+  Return a single JSON object only — no explanations, comments, or additional text.  
+🔐 Component ID Format
+Each component must have a unique ID in the following format:
   timestamp-randomString-performanceHash
   Example: "lzd45f-ab123-7x9fp"
   
@@ -57,12 +56,9 @@ header_section, greetings, flexible_plans, luxury_options, exclusive_perks,
 cta_section, milestone_celebration, special_offer, event_invitation,
 thank_you_section, social_proof, holiday_greetings
 OR if the content explicitly includes a greeting (e.g., "Hello", "Hi", "Dear", or similar warm openers),
-
-
-"left" otherwise
+"left" otherwise for all other cases
 
 "padding": Use padding values from the theme under "component" padding.
-
 - padding-   must exactly follow this structure (values can be any number):
 
 {
@@ -77,32 +73,26 @@ If additional CSS properties need to be applied beyond the defined style schema,
 "customCss": "background:red;color:blue;"
 
 * Props Requirements (inside data.props):
-  
   "text": A compelling, relevant, and well-crafted content string derived from the title, purpose, and summary (required).
-  
   "navigateToUrl": Optional — set to an empty string if not provided.
 
 CAPITALIZATION RULE
 Use uppercase words or phrases only when it:
-Highlights urgency (e.g., "LIMITED TIME")
+Highlights urgency (e.g., "LIMITED TIME",  "EXCLUSIVE OFFER", "ACT NOW"
 
-Visual Accessibility Rule (Applies to All Email Types)
-To ensure that your email content is readable and accessible across all devices and user settings, always maintain high contrast between text and background colors.
+🌈 Visual Accessibility Guidelines (Applies to All Email Types)
+To ensure high readability on all devices:
+- If backgroundColor is light (e.g., #F4F4F4, #FFFFFF):
+- Use dark text colors from the theme (e.g., #333333, #111111, or textColor)
+- Avoid light or pastel shades (e.g., #FFD700, #CCCCCC)
+- If using a light-colored text, ensure backgroundColor is dark enough to maintain contrast.
+This is especially critical for:Body text, Headings, CTAs
 
-If the backgroundColor is light (e.g., #F4F4F4, #FFFFFF, or other pale tones), avoid using light-colored text such as #FFD700, #CCCCCC, or pastel shades.
-
-Instead, choose a dark text color from the theme, such as #333333, #111111, or textColor to provide strong contrast and enhance readability.
-
-Alternatively, you can adjust the backgroundColor to a darker tone if a light text color must be used, ensuring it still fits the email’s tone and design.
-
-This rule is especially important for body text, headings, and CTAs, where clarity and legibility are critical.
-
-Special Rule for Text Content:
-If the generated text content includes an exclamation mark (!) or question mark (?), split the content into two lines:
-
-Place the sentence containing the exclamation or question mark on the first line, followed by a newline character (\n),
-
-Then place the remaining related text on the second line.
+✂️ Line Break Rule (Text Content)
+- If the text contains an exclamation mark (!) or question mark (?):
+- Split the content into two lines.
+- Place the sentence with the punctuation on the first line, followed by a newline character (\n)
+- Place the remaining related text on the second line
   Theme Usage
   Use the provided theme JSON object to determine all styling values for font, colors, spacing, etc.
   Theme for styling values:
@@ -110,13 +100,9 @@ Then place the remaining related text on the second line.
 ${JSON.stringify(emailTheme, null, 2)}.
 
   3. Response Guidelines
-  
-  Generate and return only the final JSON object.
-  
-  Ensure the text content (data.props.text) is attractive, relevant, and aligned with the title, purpose, and summary provided.
-  
-  Apply all required styles and props exactly as per theme and formatting rules.
-  
+- Generate and return only the final JSON object.
+- Ensure the text content (data.props.text) is attractive, relevant, and aligned with the title, purpose, and summary provided.
+- Apply all required styles and props exactly as per theme and formatting rules.
   Do not include any explanations, comments, or extra text outside the JSON.
 `;
 

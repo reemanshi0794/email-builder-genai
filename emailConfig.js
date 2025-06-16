@@ -1,6 +1,6 @@
 module.exports = {
-  topic: "Monthly Product Highlights",
-  description: "Showcase 3–5 top-rated or trending products of the month, including short descriptions, star ratings, and direct links to learn more or purchase."
+  topic: "You've Earned a Reward – Redeem Now!",
+  description: "Celebrate user engagement and encourage reward redemption. Use a warm, grateful tone with branded visuals. Focus on making redemption feel easy and valuable. Consider including a progress bar or user’s reward history to enhance motivation.Must-Have Content Points:Highlight points or credits earned, Explain how to redeem, Showcase reward options, CTA: Redeem My Reward,Include expiration if applicable"
 };
 
 

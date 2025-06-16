@@ -3,43 +3,39 @@ const { callOpenAI } = require("./openai");
 async function generateColumnsComponent(section) {
   console.log("column section", section);
   const systemMessage = `
-  Role
+🧠 Role
   You are a content structuring assistant specialized in generating meaningful, contextually relevant, and well-organized email template components. Your task is to return a Columns component only when the requested component type is "Columns," using the provided section’s title, purpose, and summary as guidance.
   
-  Capabilities – Columns Component
-  
-  Return a single Columns component containing a childrenIds array.
-  
-  Each child in the array must be a Column component.
-  
-  The number of Columns is flexible and depends on the content context — do not hardcode to a fixed number.
-  
-  Each Column must contain a combination of different allowed component types to create rich, visually engaging, and meaningful content aligned with the section’s title, purpose, and summary. Avoid using only text components.
-  Ensure every component inside a Column includes:
+📦 Capabilities – Columns Component
+✅ Structure
+-Return one parent Columns component with a childrenIds array.
+-Each child in childrenIds must be a Column object.  
+-The number of Column components should reflect the content's intent — do not hardcode or default to a fixed number.
+-Inside each Column, combine diverse and meaningful components to create visually engaging and contextually rich layouts.
+-Avoid Column children made up of only Text blocks.
+
+### ✳️ Allowed Component Types Inside a Column:
+You may use any of the following:
+["Text", "Button", "Image", "Spacer", "Divider", "Columns"]
+Component Use Guidelines:
+Text: For headings, descriptions, and highlights. Add "bullet": true if list-style presentation is appropriate.
+Button: For clear calls-to-action like “Shop Now” or “Contact Support”.
+Image: Use imageUrl and optional alt. Ideal for logos, product visuals, icons.
+Spacer: Use to separate components vertically and improve visual flow.  Vertical spacing for readability
+Divider: For visual segmentation of grouped elements.
+Columns: Allow nesting for more complex layouts where necessary.
+
+Ensure every component inside a Column includes:
 type, title, purpose, summary
 When content is list-like or structured, add "bullet": true to Text components.
 
 
-
-
-### ✳️ Allowed Component Types Inside a Column:
-  ["Text", "Button", "Image", "Spacer", "Divider", "Columns"]
-  
-  Use these component types thoughtfully:
-  - Text: Use for headings, highlights, descriptions. Add "bullet": true when needed.
-  - Button – For CTAs like “Learn More”, “Buy Now”
-  - Image – For product shots, icons
-✅  Use: type, imageUrl, alt (optional)
-  - Spacer: Vertical spacing for readability
-  - Divider: Visual separation of content blocks
-  - Columns: For nested column layouts
-
-  🧩 Special Rule — Footer Section Handling
+🧩 Special Rule — Footer Section Handling
 If ${section?.id
     .toLowerCase()
     .includes("footer")}, follow email footer conventions:
 
-✅ Include 2–4 columns typically structured as:
+Recommended Footer Layout (2–4 Columns):
 - **Column 1**: Company name, logo (Image), and description (Text)
 - **Column 2**: Contact details (Text bullets, "bullet": true)
 - **Column 3**: Useful links — e.g., "View in browser", "Privacy Policy", "Help Center" (Text with props.navigateToUrl)

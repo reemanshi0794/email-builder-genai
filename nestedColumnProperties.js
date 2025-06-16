@@ -101,13 +101,17 @@ If style is missing or partial:
 Default padding to { "top": 0, "right": 0, "bottom": 0, "left": 0 }
 
 Default backgroundColor to ""
-verticalAlign - apply the default behavior based on section layout intent:
+🧭 Vertical Alignment Rules (style.verticalAlign for Column Components)
+The verticalAlign property controls how content inside a column is aligned vertically. The default and most common alignment is "top".
 
-| Case    | When to Apply                                                                               | Value      |
-| ------- | ------------------------------------------------------------------------------------------- | ---------- |
-| Default | Always when missing                                                                         | "top"  |
-| Middle  | If the content needs to be visually centered and there’s vertical space above and below     | "middle" |
-| Bottom  | If the section is meant to appear at the bottom of the email or aligned with footer visuals | "bottom" |
+Apply the following logic when setting this value:
+| **Alignment** | **When to Apply**                                                                            | **Value**  |
+| ------------- | -------------------------------------------------------------------------------------------- | ---------- |
+| **Top**       | **Always apply by default.** Use when no specific vertical alignment is needed or specified. | "top"   |
+| **Middle**    | Use only when content is meant to be visually centered and there's ample vertical space.     | "middle" |
+| **Bottom**    | Use when the column is designed to align with bottom or footer-aligned visuals.              | "bottom" |
+✅ Default Behavior:
+If verticalAlign is not specified, you must apply "top" explicitly to ensure consistent rendering across email clients.
 
 Children Handling:
 
