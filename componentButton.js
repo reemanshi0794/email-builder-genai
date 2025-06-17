@@ -1,9 +1,9 @@
 const { callOpenAI } = require("./openai");
 
-function buildSafeButton(ai) {
+function buildSafeButton(ai, emailTheme) {
   const style = ai?.data?.style || {};
   const props = ai?.data?.props || {};
-
+  const themepadding = emailTheme?.padding || {}
   return {
     type: "Button",
     data: {
@@ -15,11 +15,17 @@ function buildSafeButton(ai) {
         buttonColor: style.buttonColor || "#4A90E2",
         color: style.color || "#FFFFFF",
         borderRadius: style.borderRadius ?? 5,
-        buttonPadding: style.buttonPadding || {
+         buttonPadding: style.buttonPadding || {
           top: 10,
           right: 20,
           bottom: 10,
           left: 20,
+        },
+         padding: style.padding || {
+          top:themepadding.component.top || 10,
+          right: themepadding.component.right ||20,
+          bottom: themepadding.component.bottom || 10,
+          left: themepadding.component.left || 20,
         },
         ...(style.whiteSpace && { whiteSpace: style.whiteSpace }),
         ...(style.customCss && { customCss: style.customCss }),
@@ -40,7 +46,7 @@ async function generateButtonComponent(
   childIndex
 ) {
   const insideGrid = parentSection != null && parentSection.type === "Columns";
-
+console.log("emailthemeinbutton", emailTheme)
   const systemMessage = `
   1. Role
   You are an AI assistant tasked with generating a valid JSON object for a Button component in a modular email layout system. Your responsibility is to construct the component using the user’s input and a predefined design theme, ensuring consistency, structure, and reusability across all buttons.
@@ -164,9 +170,8 @@ no extra explanations needed
     const parsed = JSON.parse(response);
     const uniqueId = Object.keys(parsed)[0];
     const aiComponent = parsed[uniqueId];
-    const buttonComponent = buildSafeButton(aiComponent);
+    const buttonComponent = buildSafeButton(aiComponent , emailTheme);
     const result = { [uniqueId]: buttonComponent };
-    console.log("Final Button Component:", JSON.stringify(result, null, 2));
     return result;
   } catch (e) {
     console.warn("Failed to parse AI response. Using fallback.");

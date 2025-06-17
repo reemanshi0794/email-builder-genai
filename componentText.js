@@ -1,12 +1,44 @@
 const { callOpenAI } = require("./openai");
 
+
+function buildSafeText(ai) {
+  const style = ai?.data?.style || {};
+  const props = ai?.data?.props || {};
+
+  return {
+    type: "Text",
+    data: {
+      style: {
+        fontWeight: style.fontWeight || "600",
+        fontFamily: style.fontFamily || "Arial, sans-serif",
+        fontSize: style.fontSize || 14,
+        lineHeight: style.lineHeight || 14,
+        textAlign: style.textAlign || "center",
+        color: style.color || "#FFFFFF",
+        borderRadius: style.borderRadius ?? 5,
+        padding: style.padding || {
+          top: 10,
+          right: 10,
+          bottom: 10,
+          left: 10,
+        },
+   ...(style.backgroundColor && { whiteSpace: style.backGroundColor }),
+      },
+      props: {
+        text: props.text || "Dummy Text",
+       ...(props.navigateToUrl && { navigateToUrl: props.navigateToUrl }),
+      },
+    },
+  };
+}
+
+
 async function generateTextComponent(
   subjectLine,
   emailTheme,
   section,
   parentSection
 ) {
-  console.log("texttttexttt", subjectLine, parentSection, section);
   const systemMessage = `
   1. Role
 You are tasked with generating a structured JSON object representing a Text component for an email layout.
@@ -123,11 +155,16 @@ ${JSON.stringify(
 `;
 
   const response = await callOpenAI(systemMessage, userMessage);
-
-  try {
-    return JSON.parse(response);
+   try {
+    const parsed = JSON.parse(response);
+    const uniqueId = Object.keys(parsed)[0];
+    const aiComponent = parsed[uniqueId];
+    const textComponent = buildSafeText(aiComponent);
+    const result = { [uniqueId]: textComponent };
+        // console.log("test", JSON.stringify(result, null, 2));
+    return result;
   } catch (e) {
-    throw new Error(`Failed to parse JSON from AI response: ${response}`);
+   throw new Error(`Failed to parse JSON from AI response: ${response}`);
   }
 }
 
