@@ -1,6 +1,6 @@
 module.exports = {
-  topic: "Product Launch Announcement: Smart Water Bottle",
-  description: "We're introducing our new Smart Hydrate Bottle – a tech-enabled water bottle that tracks your water intake and reminds you to stay hydrated.The email should include:A hero image showcasing the sleek design of the bottle.Bold headline like: Meet the Bottle That Reminds You to Drink Water.,A short intro on how hydration is essential and how this bottle makes it easier.A feature section showing 3–4 USPs: hydration reminders, temperature control, eco-friendly, app-connected.A short customer quote or early reviewer comment.A large CTA button: “Buy Now” or “Pre-order Today.”Footer with FAQs, shipping details, and support links"
+  topic: "A Big Thank You to Our Rockstar Development Team",
+  description: "An appreciation email from leadership to thank the development team for their dedication, teamwork, and successful delivery of a major milestone.Let’s keep building the future together.Add a few photos or fun moments from the journey.Include a personal note from leadership/client thanking the team for their dedication, long hours, collaboration, and resilience"
 };
 
 

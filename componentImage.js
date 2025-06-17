@@ -81,6 +81,7 @@ function buildSafeImage(ai) {
         height: style.height ?? "",
         objectFit: style.objectFit || "contain",
         borderRadius: style.borderRadius ?? 0,
+        textAlign: style.textAlign || "center",
       },
       props: {
         imageUrl: props.imageUrl || "https://via.placeholder.com/150",
@@ -136,7 +137,7 @@ navigateToUrl: optional
 
 Style Fields:
 padding
-textAlign
+textAlign- left by default
 width (must be less than 100)
 objectFit (must be "cover")
 borderRadius (optional)

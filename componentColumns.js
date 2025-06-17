@@ -27,8 +27,15 @@ function getLayoutHint(section) {
     },
     {
       hint: "image-gallery",
-      match: [id, summary].some(text =>
-        text.includes("gallery") || text.includes("image grid")
+      match: [id, title, summary].some(text =>
+        text.includes("gallery") ||  text.includes("photos") ||
+        text.includes("image grid") ||
+        text.includes("highlights") ||
+        text.includes("shared moments") ||
+        text.includes("portfolio") ||
+        text.includes("our work") ||
+        text.includes("team gallery") ||
+        text.includes("carousel")
       )
     },
     {
@@ -54,6 +61,17 @@ function getLayoutHint(section) {
         text.includes("call_to_action") ||
         text.includes("image left") ||
         text.includes("split layout")
+      )
+    },
+    {
+      hint: "testimonials",
+      match: [id, title, summary].some(text =>
+        text.includes("testimonial") ||
+        text.includes("client feedback") ||
+        text.includes("what our clients say") ||
+        text.includes("quote") ||
+        text.includes("customer review") ||
+        text.includes("partner feedback")
       )
     }
   ];
@@ -140,6 +158,15 @@ Recommended Footer Layout (2–4 Columns):
   → Each Column should contain only an Image component, optionally with alt text and title.  
   → Ideal for showcasing visual products, rewards, or team members.
 
+-**testimonial:
+  → Use 2 or 3 Columns to highlight testimonials.
+  → Each Column contains:
+   Quoted Text (with quotation marks in summary or props).
+   Customer or partner name (Text).
+   Optional image (customer photo or icon).
+   Optional description of their role or company.
+  → Style for clarity and authenticity, optionally include Divider or Spacer for visual separation.
+
 - **full-image-cta**:  
   → One wide Column.  
   → Inside: A full-width Image (banner-style), a central CTA Button, and brief supporting Text.  
@@ -166,7 +193,9 @@ Recommended Footer Layout (2–4 Columns):
     - Column 1: Company logo + description  
     - Column 2: Contact info ("bullet": true)  
     - Column 3: Links (Privacy Policy, View in browser, etc.)  
-    - Column 4 (optional): Unsubscribe CTA
+    - Column 4 (optional): "Unsubscribe" (Button or Text with link).
+    If social links (e.g., Facebook, Instagram) are present:
+Use Image (logo) with props.navigateToUrl instead of Button
 
 📌 Important:
 - Use the layout hint *only as directional guidance*.  
