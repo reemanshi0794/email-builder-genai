@@ -4,26 +4,68 @@ const { callOpenAI } = require("./openai");
 function getLayoutHint(section) {
   const id = (section?.id || "").toLowerCase();
   const title = (section?.title || "").toLowerCase();
-  const summary = (section?.summary || "").toLowerCase();
+  const summary = (section?.summary || section?.content?.map(c => c.summary).join(" ") || "").toLowerCase();
 
-  if (id.includes("footer") || title.includes("footer")) return "footer";
-  if (id.includes("checkerboard") || summary.includes("checkerboard"))
-    return "checkerboard";
-  if (id.includes("gallery")) return "image-gallery";
-  if (id.includes("event")) return "upcoming-events";
-  if (summary.includes("full height") || title.includes("hero"))
-    return "full-image-cta";
-  if (summary.includes("icon") || summary.includes("portrait"))
-    return "portrait-icons";
-  if (
-    summary.includes("short preview") ||
-    summary.includes("cta") ||
-    title.includes("text and image")
-  )
-    return "image-left-text-right";
+  const layoutHints = [
+    {
+      hint: "footer",
+      match: [id, title, summary].some(text =>
+        text.includes("footer") ||
+        text.includes("legal") ||
+        text.includes("unsubscribe") ||
+        text.includes("support")
+      )
+    },
+    {
+      hint: "checkerboard",
+      match: [id, title, summary].some(text =>
+        text.includes("checkerboard") ||
+        text.includes("side-by-side") ||
+        text.includes("alternating") ||
+        text.includes("comparison layout")
+      )
+    },
+    {
+      hint: "image-gallery",
+      match: [id, summary].some(text =>
+        text.includes("gallery") || text.includes("image grid")
+      )
+    },
+    {
+      hint: "upcoming-events",
+      match: [id, summary].some(text => text.includes("event"))
+    },
+    {
+      hint: "full-image-cta",
+      match: summary.includes("full height") || title.includes("hero")
+    },
+    {
+      hint: "portrait-icons",
+      match: [id, title, summary].some(text =>
+        text.includes("features") || text.includes("portrait") || text.includes("icon list")
+      )
+    },
+    {
+      hint: "image-left-text-right",
+      match: [summary, title, id].some(text =>
+        text.includes("short preview") ||
+        text.includes("cta") ||
+        text.includes("text and image") ||
+        text.includes("call_to_action") ||
+        text.includes("image left") ||
+        text.includes("split layout")
+      )
+    }
+  ];
+
+  for (const { hint, match } of layoutHints) {
+    if (match) return hint;
+  }
 
   return "default";
 }
+
+
 
 async function generateColumnsComponent(section) {
   console.log("column section", section);

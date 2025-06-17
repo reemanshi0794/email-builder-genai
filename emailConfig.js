@@ -1,6 +1,6 @@
 module.exports = {
-  topic: "You've Earned a Reward – Redeem Now!",
-  description: "Celebrate user engagement and encourage reward redemption. Use a warm, grateful tone with branded visuals. Focus on making redemption feel easy and valuable. Consider including a progress bar or user’s reward history to enhance motivation.Must-Have Content Points:Highlight points or credits earned, Explain how to redeem, Showcase reward options, CTA: Redeem My Reward,Include expiration if applicable"
+  topic: "Product Launch Announcement: Smart Water Bottle",
+  description: "We're introducing our new Smart Hydrate Bottle – a tech-enabled water bottle that tracks your water intake and reminds you to stay hydrated.The email should include:A hero image showcasing the sleek design of the bottle.Bold headline like: Meet the Bottle That Reminds You to Drink Water.,A short intro on how hydration is essential and how this bottle makes it easier.A feature section showing 3–4 USPs: hydration reminders, temperature control, eco-friendly, app-connected.A short customer quote or early reviewer comment.A large CTA button: “Buy Now” or “Pre-order Today.”Footer with FAQs, shipping details, and support links"
 };
 
 
