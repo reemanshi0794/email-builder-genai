@@ -1,7 +1,35 @@
 const { callOpenAI } = require("./openai");
 
+// ✅ Step 1: Detect layout type based on section metadata
+function getLayoutHint(section) {
+  const id = (section?.id || "").toLowerCase();
+  const title = (section?.title || "").toLowerCase();
+  const summary = (section?.summary || "").toLowerCase();
+
+  if (id.includes("footer") || title.includes("footer")) return "footer";
+  if (id.includes("checkerboard") || summary.includes("checkerboard"))
+    return "checkerboard";
+  if (id.includes("gallery")) return "image-gallery";
+  if (id.includes("event")) return "upcoming-events";
+  if (summary.includes("full height") || title.includes("hero"))
+    return "full-image-cta";
+  if (summary.includes("icon") || summary.includes("portrait"))
+    return "portrait-icons";
+  if (
+    summary.includes("short preview") ||
+    summary.includes("cta") ||
+    title.includes("text and image")
+  )
+    return "image-left-text-right";
+
+  return "default";
+}
+
 async function generateColumnsComponent(section) {
   console.log("column section", section);
+const layoutHint = getLayoutHint(section); // ✅ once
+console.log("layoutHintlayoutHint",layoutHint)
+
   const systemMessage = `
 🧠 Role
   You are a content structuring assistant specialized in generating meaningful, contextually relevant, and well-organized email template components. Your task is to return a Columns component only when the requested component type is "Columns," using the provided section’s title, purpose, and summary as guidance.
@@ -46,7 +74,62 @@ Recommended Footer Layout (2–4 Columns):
 ✅ Use short and clear titles like “Contact Us”, “Unsubscribe”, “Legal”, etc.
 
 ✅ Ensure visual spacing and divider usage improves clarity.
-  
+
+🎯 Layout Hint: "${layoutHint}" – Use this as guidance to determine the structure, number of columns, and arrangement of content within the Columns component.
+
+💡 Layout Types:
+
+- **image-left-text-right**:  
+  → Create 2 columns.  
+  → Left Column: Image.  
+  → Right Column: Text block(s), optional Button (e.g., CTA like “Redeem Now”).
+
+- **checkerboard**:  
+  → Use multiple columns or nested Columns inside each Column to alternate image and text.  
+  → Example: Column 1 (Image + Text), Column 2 (Text + Image), and so on.
+
+- **portrait-icons**:  
+  → Create 3 or 4 equally spaced Columns.  
+  → Each Column contains a vertically stacked Image (icon), short Text title, and a description.  
+  → Use this for visual representations of benefits, services, or features.
+
+- **image-gallery**:  
+  → Use 3–6 Columns based on number of images.  
+  → Each Column should contain only an Image component, optionally with alt text and title.  
+  → Ideal for showcasing visual products, rewards, or team members.
+
+- **full-image-cta**:  
+  → One wide Column.  
+  → Inside: A full-width Image (banner-style), a central CTA Button, and brief supporting Text.  
+  → Use vertical Spacer components to visually balance spacing.
+
+- **upcoming-events**:  
+  → Use 2–3 Columns to display event details.  
+  → Each Column may include: Event image, name (Text), date (Text), CTA (Button).  
+  → Use Divider between events for clarity if vertical stacking is used inside Columns.
+
+- **icon-text-grid** *(additional)*:  
+  → Grid of 4–6 Columns.  
+  → Each Column: Icon (Image), heading (Text), description (Text).  
+  → Suitable for feature highlights or instructions.
+
+- **bullet-lists** *(additional)*:  
+  → Use 2 Columns:  
+     - Left: Text with "bullet": true.  
+     - Right: Supporting image or CTA.  
+  → Good for how-to steps, instructions, or feature breakdowns.
+
+- **footer**:  
+  → Use 2–4 Columns as per email footer conventions:  
+    - Column 1: Company logo + description  
+    - Column 2: Contact info ("bullet": true)  
+    - Column 3: Links (Privacy Policy, View in browser, etc.)  
+    - Column 4 (optional): Unsubscribe CTA
+
+📌 Important:
+- Use the layout hint *only as directional guidance*.  
+- Base the final column count and arrangement on the actual content quantity and intent.
+
   Response Guidelines
   
   Only respond when the requested component type is "Columns".
@@ -125,10 +208,11 @@ type, title, purpose, summary
     }
   ]
 }
-
 `;
 
   const userMessage = `
+  📌 Layout Hint: "${layoutHint}" – This is a structural guide for rendering Columns.
+
  Please refine this section based on the provided title, purpose, and summary. If content is also provided, use it to inform the output. Generate a relevant and meaningful Text component for each content point.
 Here’s the content for the section based on the provided details:
 
@@ -139,6 +223,7 @@ ${JSON.stringify(
     purpose: section.purpose,
     summary: section.summary,
     type: "Columns",
+    layoutHint: layoutHint,
   },
   null,
   2
